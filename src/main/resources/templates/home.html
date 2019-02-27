@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Sipariş Sayfası</title>
+</head>
+<body>
+<h1>Sipariş Takip Sistemi</h1>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Anasayfa</a></li>
+        <li><a href="/users">Kullanıcılar</a></li>
+        <li><a href="/items/add">Sipariş Ver</a></li>
+        <li><a href="/items">Sipariş Gör</a></li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/users/} + ${user.id} + @{/items}">My Items</a>
+        </li>
+    </ul>
+</nav>
+<div sec:authorize="isAnonymous()">
+    <h1>Welcome!</h1>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <h1 th:text="'Welcome, ' + ${user.username} + '!'"></h1>
+</div>
+
+<div sec:authorize="isAnonymous()">
+    <p>Click <a th:href="@{/login}">here</a> to login.</p>
+    <p>Click <a th:href="@{/register}">here</a> to register.</p>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Log Out"/>
+    </form>
+</div>
+
+
+</body>
+</html>

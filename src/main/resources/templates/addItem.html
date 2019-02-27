@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html   lang="tr"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Siparis Verme Sayfası</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Anasayfa</a></li>
+        <li><a href="/users">Kullanıcılar</a></li>
+        <li><a href="/items/add">Sipariş Ver</a></li>
+        <li><a href="/items">Sipariş Gör</a></li>
+    </ul>
+</nav>
+
+<form th:action="@{/items}" th:object="${itemForm}" th:method="post">
+    <table>
+        <tr>
+            <td>Item Name:</td>
+            <td><input type="text" th:field="*{itemName}" /></td>
+            <td th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}">Item Name Error will appear here</td>
+        </tr>
+        <tr>
+            <td>Item Type:</td>
+            <td><input type="text" th:field="*{itemType}" /></td>
+            <td th:if="${#fields.hasErrors('itemType')}" th:errors="*{itemType}">Item Type Error will appear here</td>
+        </tr>
+        <tr>
+            <td>Item Length:</td>
+            <td><input type="text" th:field="*{itemlength}" /></td>
+            <td th:if="${#fields.hasErrors('itemlength')}" th:errors="*{itemlength}">Item Length Error will appear here</td>
+        </tr>
+        <tr>
+            <td>Item Width:</td>
+            <td><input type="text" th:field="*{itemwidth}" /></td>
+            <td th:if="${#fields.hasErrors('itemwidth')}" th:errors="*{itemwidth}">Item Width Error will appear here</td>
+        </tr>
+        <tr>
+            <td>Amount:</td>
+            <td><input type="text" th:field="*{amount}" /></td>
+            <td th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">Amount Error will appear here</td>
+        </tr>
+        <tr>
+            <td><button type="submit">Add</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

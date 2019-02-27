@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html   lang="tr"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Siparişler</title>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Anasayfa</a></li>
+        <li><a href="/users">Kullanıcılar</a></li>
+        <li><a href="/items/add">Sipariş Ver</a></li>
+        <li><a href="/items">Sipariş Gör</a></li>
+    </ul>
+</nav>
+<table>
+    <tr>
+        <th></th>
+        <th>Sipariş Kodu</th>
+        <th>Sipariş İsmi</th>
+        <th>Sipariş Tipi</th>
+        <th>Ürün Uzunluğu</th>
+        <th>Ürün Genişliği</th>
+        <th>Belongs to</th>
+    </tr>
+    <tr th:each="item : ${items}">
+        <td>
+            <form th:action="@{/items/}  +  ${item.id}" th:method="delete">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+        <td th:text="${item.inventoryCode}">Item code will appear here</td>
+        <td th:text="${item.name}">Item name will appear here</td>
+        <td th:text="${item.type}">Item type will appear here</td>
+        <td th:text="${item.length}">Item length will appear here</td>
+        <td th:text="${item.width}">Item width will appear here</td>
+        <td th:text="${item.user}">Belongs to</td>
+        <td>
+            <form th:action="@{/items/} + ${item.id}" th:method="put">
+                <select th:field="*{assignForm.username}">
+                    <option th:each="username : ${usernames}"
+                            th:value="${username}"
+                            th:text="${username}">Username will appear here
+                    </option>
+                </select>
+                <button type="submit">Assign</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
